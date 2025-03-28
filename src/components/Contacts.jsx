@@ -12,17 +12,14 @@ const Contacts = () => {
   return (
     <div className="Contacts">
       <div className="Socials">
-        <a href="https://www.linkedin.com/in/valeriemyen/">
-          <img className="Icon" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/linkedin-app-white-icon.png" />
+        <a href="https://www.linkedin.com/in/valmyen/">
+          <img className="Icon" src="linkedin-app-white-icon.png" />
         </a>
         <a href="https://github.com/valerieYen">
-          <img className="Icon" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
+          <img className="Icon" src="github-white-icon.png" />
         </a>
         <a href="https://vizzy.com/@valmyen">
           <img className="Icon" src="vizzylogo.png" />
-        </a>
-        <a href="https://www.instagram.com/v.m.yen/">
-          <img className="Icon" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/instagram-white-icon.png" />
         </a>
       </div>
       <div className="ResumeDownload" onClick={downloadResume}>

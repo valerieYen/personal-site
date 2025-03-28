@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+.About {
+    background-color: #0d0d0eff;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    box-shadow: inset 0px 0px 30px 5px rgba(255, 255, 255, 0.062);
+    padding: 30px;
+}
+
+.headshot {
+    width: 50%;
+    max-height: 35rem;
+    object-fit: contain;
+    margin-right: 1rem;
+}
+
+.blurb {
+    color: aliceblue;
+    font-family: "Oxanium", serif;
+    font-size: 2.9rem;
+    max-width: 70%;
+}
