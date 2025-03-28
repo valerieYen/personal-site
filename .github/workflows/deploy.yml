@@ -12,37 +12,38 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # Recommended over npm install for CI environments
 
       - name: Build project
         run: npm run build
 
-      - name: Debug workspace
+      - name: Extensive Debug of Build Output
         run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "Dist directory contents (if exists):"
-          ls -la dist || echo "dist directory not found"
-          echo "Current working directory:"
-          pwd
+          echo "Build output directory contents:"
+          find . -maxdepth 2 -type d
+          echo "Checking potential build directories:"
+          ls -la build || echo "No 'build' directory"
+          ls -la dist || echo "No 'dist' directory"
+          ls -la out || echo "No 'out' directory"
 
       - name: Upload production-ready build files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: production-files
-          path: dist
+          # Try multiple potential build directories
+          path: |
+            build
+            dist
+            out
           if-no-files-found: error
-
-      - name: Verify artifact upload
-        run: echo "Artifact upload step completed"
 
   deploy:
     name: Deploy
@@ -52,30 +53,22 @@ jobs:
       contents: write
       
     steps:
-      - name: Debug before download
-        run: |
-          echo "Current directory before download:"
-          ls -la
-          pwd
-
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: production-files
-          path: dist
 
-      - name: Debug after download
+      - name: Debug after artifact download
         run: |
-          echo "Current directory after download:"
+          echo "Contents after artifact download:"
           ls -la
-          echo "Dist directory contents:"
-          ls -la dist || echo "dist directory not found"
-          pwd
+          echo "Checking subdirectories:"
+          find . -maxdepth 2 -type d
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          publish_dir: .  # Changed from 'dist' to current directory
           publish_branch: gh-pages
           force_orphan: true
