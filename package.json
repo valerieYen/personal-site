@@ -2,7 +2,7 @@
   "name": "vmy",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://valerieYen.github.io/personal_site/",
+  "homepage": "https://valerieYen.github.io/personal-site/",
   "type": "module",
   "scripts": {
     "dev": "vite",
